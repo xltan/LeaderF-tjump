@@ -25,7 +25,6 @@ function! leaderf#Tjump#Maps()
     nnoremap <buffer> <silent> q             :exec g:Lf_py "tjumpExplManager.quit()"<CR>
     nnoremap <buffer> <silent> i             :exec g:Lf_py "tjumpExplManager.input()"<CR>
     nnoremap <buffer> <silent> <F1>          :exec g:Lf_py "tjumpExplManager.toggleHelp()"<CR>
-    nnoremap <buffer> <silent> <F5>          :exec g:Lf_py "tjumpExplManager.refresh()"<CR>
     if has_key(g:Lf_NormalMap, "Tjump")
         for i in g:Lf_NormalMap["Tjump"]
             exec 'nnoremap <buffer> <silent> '.i[0].' '.i[1]

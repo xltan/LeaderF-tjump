@@ -16,7 +16,9 @@ class TjumpExplorer(TagExplorer):
         taglist = lfEval('taglist("%s")' % tagname)
         
         taglist = [tag for tag in taglist if tag['name'] == tagname]
-        if len(taglist) <= 1:
+        if len(taglist) == 0:
+            return None
+        if len(taglist) == 1:
             lfCmd('tag %s' % tagname)
             return []
 
@@ -46,8 +48,11 @@ class TjumpExplManager(TagExplManager):
         self._cli.setNameOnlyFeature(self._getExplorer().supportsNameOnly())
         self._cli.setRefineFeature(self._supportsRefine())
         content = self._getExplorer().getContent(*args, **kwargs)
-        if not content:
+        if content is None:
+            lfCmd("echohl Error | redraw | echo ' No tag found!' | echohl NONE")
             return
+		if not content:
+			return
         self._getInstance().enterBuffer(win_pos)
 
         self._getInstance().setStlCategory(self._getExplorer().getStlCategory())
