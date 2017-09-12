@@ -51,8 +51,8 @@ class TjumpExplManager(TagExplManager):
         if content is None:
             lfCmd("echohl Error | redraw | echo ' No tag found!' | echohl NONE")
             return
-		if not content:
-			return
+        if not content:
+            return
         self._getInstance().enterBuffer(win_pos)
 
         self._getInstance().setStlCategory(self._getExplorer().getStlCategory())
