@@ -47,6 +47,7 @@ class TjumpExplManager(TagExplManager):
     def startExplorer(self, win_pos, *args, **kwargs):
         self._cli.setNameOnlyFeature(self._getExplorer().supportsNameOnly())
         self._cli.setRefineFeature(self._supportsRefine())
+        lfCmd("echo ''")
         content = self._getExplorer().getContent(*args, **kwargs)
         if content is None:
             lfCmd("echohl Error | redraw | echo ' No tag found!' | echohl NONE")
