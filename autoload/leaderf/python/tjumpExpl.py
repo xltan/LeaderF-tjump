@@ -13,22 +13,12 @@ from leaderf.tagExpl import TagExplorer, TagExplManager
 class TjumpExplorer(TagExplorer):
     def getContent(self, *args, **kwargs):
         tagname = args[0]
-        taglist = lfEval('taglist("%s")' % tagname)
+        taglist = lfEval('taglist("^%s$", @%%)' % (tagname,))
         
-        taglist = [tag for tag in taglist if tag['name'] == tagname]
-        if len(taglist) == 0:
-            return None
-        if len(taglist) == 1:
-            lfCmd('tag %s' % tagname)
-            return []
-
         for tag in taglist:
-            current_file = 1 if lfEval("fnamemodify('%s', ':p')" % tag['filename']) == vim.current.buffer.name else 0
-            tag['pri'] = current_file
-            tag['filename'] = tag['filename'].replace('\\\\', '/')
-        taglist.sort(key=lambda v: -v['pri'])
-        content = map(lambda v: '%s\t%s\t%s;"\t%s' % \
-            (v['filename'], v['name'], v['cmd'], v['kind']), taglist)
+            tag['filename'] = tag['filename'].replace('\\\\', '\\')
+
+        content = ['%s\t%s\t%s;"\t%s' % (tag['filename'], tag['name'], tag['cmd'], tag['kind']) for tag in taglist]
         return content
 
     def getStlCategory(self):
@@ -45,15 +35,17 @@ class TjumpExplManager(TagExplManager):
         lfCmd("call leaderf#Tjump#Maps()")
 
     def startExplorer(self, win_pos, *args, **kwargs):
-        self._cli.setNameOnlyFeature(self._getExplorer().supportsNameOnly())
-        self._cli.setRefineFeature(self._supportsRefine())
-        lfCmd("echo ''")
         content = self._getExplorer().getContent(*args, **kwargs)
-        if content is None:
+        if not content:
             lfCmd("echohl Error | redraw | echo ' No tag found!' | echohl NONE")
             return
-        if not content:
+        if len(content) == 1:
+            lfCmd("")
+            self._acceptSelection(content[0])
             return
+        self._cli.setNameOnlyFeature(self._getExplorer().supportsNameOnly())
+        self._cli.setRefineFeature(self._supportsRefine())
+        lfCmd("echo ' Searching'")
         self._getInstance().enterBuffer(win_pos)
 
         self._getInstance().setStlCategory(self._getExplorer().getStlCategory())
@@ -128,7 +120,7 @@ class TjumpExplManager(TagExplManager):
 
         if lfEval("search('\V%s', 'wc')" % escQuote(tagname)) == '0':
             lfCmd("norm! ^")
-        lfCmd("norm! zz")
+        # lfCmd("norm! zz")
 
     def _getDigest(self, line, mode):
         """
