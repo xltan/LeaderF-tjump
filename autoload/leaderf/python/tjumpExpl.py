@@ -91,36 +91,20 @@ class TjumpExplManager(TagExplManager):
         tagfile, tagname, right = line.split('\t', 2)
         res = right.split(';"\t', 1)
         tagaddress = res[0]
-        try:
-            lfCmd("hide edit %s" % escSpecial(tagfile))
-        except vim.error as e: # E37
-            lfPrintError(e)
+        currentname = lfEval('@%')
+        if currentname != tagfile:
+            try:
+                lfCmd("hide edit %s" % escSpecial(tagfile))
+            except vim.error as e: # E37
+                lfPrintError(e)
+        else:
+            lfCmd("normal! gg")
 
         if tagaddress[0] not in '/?':
             lfCmd(tagaddress)
         else:
-            lfCmd("norm! gg")
-            # In case there are mutiple matches.
-            if len(res) > 1:
-                result = re.search('(?<=\t)line:\d+', res[1])
-                if result:
-                    line_nr = result.group(0).split(':')[1]
-                    lfCmd(line_nr)
-                else: # for c, c++
-                    keyword = "(class|enum|struct|union)"
-                    result = re.search('(?<=\t)%s:\S+' % keyword, res[1])
-                    if result:
-                        tagfield = result.group(0).split(":")
-                        name = tagfield[0]
-                        value = tagfield[-1]
-                        lfCmd("call search('\m%s\_s\+%s\_[^;{]*{', 'w')" % (name, value))
-
             pattern = "\M" + tagaddress[1:-1]
             lfCmd("call search('%s', 'w')" % escQuote(pattern))
-
-        if lfEval("search('\V%s', 'wc')" % escQuote(tagname)) == '0':
-            lfCmd("norm! ^")
-        # lfCmd("norm! zz")
 
     def _getDigest(self, line, mode):
         """
