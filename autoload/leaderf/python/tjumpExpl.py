@@ -40,7 +40,7 @@ class TjumpExplManager(TagExplManager):
             lfCmd("echohl Error | redraw | echo ' No tag found!' | echohl NONE")
             return
         if len(content) == 1:
-            lfCmd("")
+            lfCmd("echo ''")
             self._acceptSelection(content[0])
             return
         self._cli.setNameOnlyFeature(self._getExplorer().supportsNameOnly())
@@ -98,7 +98,7 @@ class TjumpExplManager(TagExplManager):
             except vim.error as e: # E37
                 lfPrintError(e)
         else:
-            lfCmd("normal! gg")
+            lfCmd("normal! %sgg" % lfEval("line('.')"))
 
         if tagaddress[0] not in '/?':
             lfCmd(tagaddress)
