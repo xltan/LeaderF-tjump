@@ -106,6 +106,9 @@ class TjumpExplManager(TagExplManager):
             pattern = "\M" + tagaddress[1:-1]
             lfCmd("call search('%s', 'w')" % escQuote(pattern))
 
+        if lfEval("search('\V%s', 'wc')" % escQuote(tagname)) == '0':
+            lfCmd("norm! ^")
+
     def _getDigest(self, line, mode):
         """
         specify what part in the line to be processed and highlighted
