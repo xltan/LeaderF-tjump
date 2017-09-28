@@ -33,5 +33,5 @@ function! leaderf#Tjump#Maps()
 endfunction
 
 function! leaderf#Tjump#startExpl(win_pos, ...)
-    call leaderf#LfPy("tjumpExplManager.startExplorer('".a:win_pos."','".a:1."')")
+    call leaderf#LfPy('tjumpExplManager.startExplorer("'.a:win_pos.'","'.a:1.'")')
 endfunction
