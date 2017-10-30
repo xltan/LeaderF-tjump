@@ -61,6 +61,9 @@ class TjumpExplManager(TagExplManager):
 
         self._start_time = time.time()
 
+        self._pattern = kwargs.get("pattern", "")
+        self._cli.setPattern(self._pattern)
+
         if isinstance(content, list):
             self._content = content
             self._iteration_end = True
