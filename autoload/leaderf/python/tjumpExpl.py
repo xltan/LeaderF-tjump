@@ -37,8 +37,6 @@ class TjumpExplManager(TagExplManager):
     def startExplorer(self, win_pos, *args, **kwargs):
         content = self._getExplorer().getContent(*args, **kwargs)
         if not content:
-            lfCmd("echohl Error | echo ' No tag found!' | echohl NONE")
-            lfCmd("YcmCompleter GoTo")
             return
         if len(content) == 1:
             lfCmd("echo ''")
