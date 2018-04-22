@@ -72,6 +72,18 @@ hi def link Lf_hl_Tjump_StlLineInfo Normal
 hi def link Lf_hl_Tjump_StlTotal Normal
 hi def link Lf_hl_Tjump_StlSeparator3 Normal
 
+hi def link Lf_hl_Function_StlName Normal
+hi def link Lf_hl_Function_StlCategory Normal
+hi def link Lf_hl_Function_StlNameOnlyMode Normal
+hi def link Lf_hl_Function_StlFullPathMode Normal
+hi def link Lf_hl_Function_StlFuzzyMode Normal
+hi def link Lf_hl_Function_StlRegexMode Normal
+hi def link Lf_hl_Function_StlCwd Normal
+hi def link Lf_hl_Function_StlBlank Normal
+hi def link Lf_hl_Function_StlLineInfo Normal
+hi def link Lf_hl_Function_StlTotal Normal
+hi def link Lf_hl_Function_StlSeparator3 Normal
+
 hi def link Lf_hl_Search_History_StlName Normal
 hi def link Lf_hl_Search_History_StlCategory Normal
 hi def link Lf_hl_Search_History_StlNameOnlyMode Normal
