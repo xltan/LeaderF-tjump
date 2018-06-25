@@ -35,6 +35,7 @@ class TjumpExplManager(TagExplManager):
         lfCmd("call leaderf#Tjump#Maps()")
 
     def startExplorer(self, win_pos, *args, **kwargs):
+        self._arguments = kwargs.get("arguments", {})
         content = self._getExplorer().getContent(*args, **kwargs)
         if not content:
             return
