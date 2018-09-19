@@ -95,3 +95,15 @@ hi def link Lf_hl_Search_History_StlBlank Normal
 hi def link Lf_hl_Search_History_StlLineInfo Normal
 hi def link Lf_hl_Search_History_StlTotal Normal
 hi def link Lf_hl_Search_History_StlSeparator3 Normal
+
+hi def link Lf_hl_Buffer_StlName Normal
+hi def link Lf_hl_Buffer_StlCategory Normal
+hi def link Lf_hl_Buffer_StlNameOnlyMode Normal
+hi def link Lf_hl_Buffer_StlFullPathMode Normal
+hi def link Lf_hl_Buffer_StlFuzzyMode Normal
+hi def link Lf_hl_Buffer_StlRegexMode Normal
+hi def link Lf_hl_Buffer_StlCwd Normal
+hi def link Lf_hl_Buffer_StlBlank Normal
+hi def link Lf_hl_Buffer_StlLineInfo Normal
+hi def link Lf_hl_Buffer_StlTotal Normal
+hi def link Lf_hl_Buffer_StlSeparator3 Normal
