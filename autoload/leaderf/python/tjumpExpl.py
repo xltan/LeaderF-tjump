@@ -62,6 +62,7 @@ class TjumpExplManager(TagExplManager):
 
         self._pattern = kwargs.get("pattern", "")
         self._cli.setPattern(self._pattern)
+        self._callback = self._workInIdle
 
         if isinstance(content, list):
             self._content = content
@@ -71,18 +72,12 @@ class TjumpExplManager(TagExplManager):
                 pass
             else:
                 self._getInstance().setBuffer(content)
-            self.input(self._workInIdle)
+            self.input()
         else:
-            if lfEval("g:Lf_CursorBlink") == '0':
-                self._getInstance().initBuffer(content, self._getUnit(), self._getExplorer().setContent)
-                self._content = self._getInstance().buffer[:]
-                self._iteration_end = True
-                self.input()
-            else:
-                self._content = []
-                self._iteration_end = False
-                self._backup = None
-                self.input(content)
+            self._getInstance().initBuffer(content, self._getUnit(), self._getExplorer().setContent)
+            self._content = self._getInstance().buffer[:]
+            self._iteration_end = True
+            self.input()
 
         self._launched = True
 
