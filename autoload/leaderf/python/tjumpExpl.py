@@ -71,7 +71,7 @@ class TjumpExplManager(TagExplManager):
                 pass
             else:
                 self._getInstance().setBuffer(content)
-            self.input()
+            self.input(self._workInIdle)
         else:
             if lfEval("g:Lf_CursorBlink") == '0':
                 self._getInstance().initBuffer(content, self._getUnit(), self._getExplorer().setContent)
